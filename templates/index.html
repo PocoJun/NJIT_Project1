@@ -1,0 +1,55 @@
+<html>
+    <head>
+        
+        <title>Food Recipe</title>
+         <link rel="stylesheet" href= "../static/food_style.css" type= "text/css"  />
+         <meta http-equiv="refresh" content="5" >
+         <style>
+        
+            
+            h1{
+                text-align: center;
+                font-size: 40px;
+            }
+            h2{
+                font-size: 80px;
+                text-align: center;
+                color: blue;
+            }
+            h3{
+                color: yellow;
+                font-size:50px;
+            }
+            .contents {
+                background-color: brown;
+            }
+            
+            .information {
+                background-color: blue;
+                font-size: 30px;
+                text-align: center;
+                
+            }
+            
+            p{
+                color: red;
+            }
+            
+        </style>
+    </head>
+    <body>
+    <div class="contents">
+        <h1> Project1 </h1>
+        <h2> Food Name: {{ Food_name }}</h2>
+        <h3>Twitter of {{ name }}, @{{ screen_name }}<br>
+            Description: {{  description  }}
+        </h3>
+    </div>
+    <div class="information">
+            <p> Date: {{ date }}<br>
+                Link: {{ link }}
+            </p>
+    </div>
+    
+    </body>
+</html>
