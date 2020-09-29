@@ -1,7 +1,7 @@
 from tweepy import OAuthHandler
 from tweepy import API
 from tweepy import Cursor
-import sys, tweepy, os, flask, random, datetime, requests
+import sys, tweepy, os, flask, random, datetime, requests, json
 from os.path import join, dirname
 from dotenv import load_dotenv
 from ttp import ttp
@@ -9,43 +9,35 @@ from ttp import ttp
 dotenv_path = join(dirname(__file__), 'food_list.env')
 load_dotenv(dotenv_path)
 
+dotenv_path = join(dirname(__file__), 'spoon.env')
+load_dotenv(dotenv_path)
+
 consumer_key = os.getenv('consumer_key')
 consumer_secret = os.getenv('consumer_secret')
 access_token = os.getenv('access_token')
 access_token_secret = os.getenv('access_token_secret')
 
+spoonacular_key=os.getenv('SPOONACULAR_KEY')
+
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = API(auth)
 
-'''
-if choose == "Pork cutlet":
-    tweets = api.search(choose, count=1, lang='en', exclude='retweets', tweet_mode='extended') 
-    #user = api.user_timeline(tweets)
-    #print(user)
-    tweets.user.screen_name
-    print(tweets)
-    #for item in tweets:
-    #    print(item)
-#pork = api.user_timeline("Pork cutlet")
-#    url = 'http://search.twitter.com/search.json?q=Pork cutlet'
-#    result = requests.get(url)
-#    results = result.json()
-#    print(results)
-'''
-food_list = ["Pork cutlet", "Curry", "Ramen", "Cake", "Mashed Potato", "Sushi", "Chicken Soup", "Udon"]
+food_list = ["Pork Cutlet", "Curry", "Ramen", "Cake", "Mashed Potato", "Sushi", "Chicken Soup", "Udon"]
 
-def food_get():
+app = flask.Flask(__name__)
+
+#def food_get():
     
-    choose = random.choice(food_list)
-    return choose
+choose = random.choice(food_list)
+    #return choose
 
 
 def tweets_get():
     count = 20
     lang = 'en'
     tweets_list = []
-    search = food_get()
+    search = choose
 
     users = api.search_users(search, count, lang)
 
@@ -62,25 +54,39 @@ def tweets_get():
     tweet_information = [search, tweets_list]
     return tweet_information
 
-#user_name = tweets_list[0][0]
-#user_id = tweets_list[0][1]
-#description = tweets_list[0][2]
-#date = tweets_list[0][3]
+def spoon_url():
+    query = choose
+    url = "https://api.spoonacular.com/recipes/complexSearch?apiKey={}&query= {}".format(spoonacular_key, query)
+    response = requests.get(url)
+    print(response)
+    return url
 
-app = flask.Flask(__name__)
+def food_recipe():
+    #search = food_get()
+    #link = "https://api.spoonacular.com/recipes/{}/information?apiKey={}".format(search, spoonacular_key)
+    spoon = spoon_url()
+    
+    return spoon
+
 
 @app.route('/') #python decorator
 def index():
     
-    #tweets = tweepy.Cursor(api.search,  q=search, lang="en", since=date_since).items(5)
+    info = tweets_get()
+    spoon = spoon_url()
+    print(spoon)
+    response = requests.get(spoon)
+    #print(response)
+    json_body = response.json()
+    #print(json_body)
+    print(json.dumps(json_body['results'][0]["id"]))
+    print(json.dumps(json_body['results'][0]["title"]))
+    print(json.dumps(json_body['results'][0]["image"]))
     
-    #for tweet in tweets:
-    #    print(tweet.text)
-    
-    #result = api.search(q=search, count = 100)
-    
-    info = tweets_get() 
     tweet = random.choice(info[1]) # random choice for refresh
+    
+    #recipe = food_recipe()
+    #print(recipe)
     
     return flask.render_template(
              "index.html",
@@ -92,7 +98,6 @@ def index():
              date = tweet[4],
              link = tweet[5],
              Food_name = info[0]
-             
         )
 
 app.run(
