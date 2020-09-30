@@ -4,7 +4,6 @@ from tweepy import API
 import tweepy, os, flask, random, datetime, requests, json
 from os.path import join, dirname
 from dotenv import load_dotenv
-from ttp import ttp
 
 # spoon env secret key
 dotenv_path = join(dirname(__file__), 'spoon.env')
@@ -100,81 +99,13 @@ def spoon_url():
     #query = choose
     Tweets = tweets_get()
     print(Tweets[0])
-    return 
-    '''
-    url = "https://api.spoonacular.com/recipes/complexSearch?apiKey={}&query= {}".format(spoonacular_key, query)
-    #response = requests.get(url)
-    spoon = []
-    response = requests.get(url)
-    json_body = response.json()
-    recipe_id = json.dumps(json_body['results'][0]["id"])
-    id_url =  "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/information?includeNutrition=false&apiKey=" + spoonacular_key
-    recipe_response = requests.request("GET", id_url)
-    recipe_dictionary = recipe_response.json()
-    for dictionary in recipe_dictionary:
-        spoon_name = dictionary["title"]
-        recipe_url = dictionary["sourceUrl"]
-        time = dictionary["readyInMinutes"]
-        image = dictionary["image"]
-        source = dictionary["sourceName"]
-        score = dictionary["spoonacularScore"]
-        likes = dictionary["aggregateLikes"]
-        
-        spoon.append([spoon_name, recipe_url, time, image, source, score, likes])
-    
-'''
-#def food_recipe():
-#    query = choose
-#    id_url =  "https://api.spoonacular.com/recipes/" + query + "/information?includeNutrition=false&apiKey=" + spoonacular_key
-    #print(id_url)
-#    id_response = requests.request("GET", id_url)
-#    id_json_body = id_response.json()
-#    print(id_json_body)
-    #id_dictionary = id_json_body["result"][random.randint(0,7)]
-    #recipe_id = id_dictionary["id"]
-    
-    #recipe_url = "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/information?includeNutrition=false&apiKey=" + spoonacular_key
-    #recipe_response = requests.request("GET", id_url)
-    #recipe_dictionary = recipe_response.json()
-    #print(recipe_dictionary)
-    
-    #return id_json_body
+    return
 
 
 @app.route('/') #python decorator
 def index():
     
     info = tweets_get()
-    #spoon = spoon_url()
-    #print(spoon)
-    #recipe = food_recipe()
-    #print(recipe)
-    #num_id = []
-    #response = requests.get(spoon)
-    #print(response)
-    #json_body = response.json()
-    #print(json_body)
-    #recipe_id = json.dumps(json_body['results'][0]["id"])
-    #title_name = json.dumps(json_body['results'][0]["title"])
-    #food_image = json.dumps(json_body['results'][0]["image"])
-    
-    #id_url =  "https://api.spoonacular.com/recipes/" + str(recipe_id) + "/information?includeNutrition=false&apiKey=" + spoonacular_key
-    #recipe_response = requests.request("GET", id_url)
-    #recipe_dictionary = recipe_response.json()
-    #recipe_name = recipe_dictionary["title"]
-    #recipe_url = recipe_dictionary["sourceUrl"]
-    #recipe_time = recipe_dictionary["readyInMinutes"]
-    #recipe_image = recipe_dictionary["image"]
-    #recipe_source = recipe_dictionary["sourceName"]
-    #recipe_score = recipe_dictionary["spoonacularScore"]
-    #recipe_likes = recipe_dictionary["aggregateLikes"]
-    #recipe_json_body = recipe_response.json()
-    #print(recipe_json_body)
-    #print(json.dumps(recipe_json_body['results'])
-    #print(recipe_dictionary)
-    #print(id_json_body)
-    #print(json.dumps(id_json_body['results'][0]["id"]))
-   
     
     
     tweet = random.choice(info[1]) # random choice for refresh tweets
