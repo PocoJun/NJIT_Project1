@@ -1,1 +1,1 @@
-web: python food_list.py
+web: python food_list.py $PORT
