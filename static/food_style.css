@@ -1,15 +1,67 @@
 body {
-    background-color: white;
+    
     font-family: Arial;
     margin-bottom: 1.3em;
     page-break-inside: avoid;
+    padding-top: 1em;
+    padding-bottom: 5em;
+    padding-left: 1em;
+    background-color: rgba(100, 80, 150, 0.5); /* rgba(red, green, blue, alpha */
 }
-
-
+    
 h1{
     text-align: center;
-    font-size: 30px;
+    font-size: 40px;
 }
- 
+
+.name{
+        color: black;
+        text-align: center;
+}
+h2{
+    font-size: 20px;
+    text-align: center;
+}
+td{
+    text-align: center;
+    font-size: 20px;
+}
+            
+.info{
+        color: red;
+}
+.ingredients{
+                text-align: left;
+                color: yellow;
+                font-size: 20px;
+}
+.list{
+        text-align: left;
+        color: black;
+        font-size: 30px;
+}
+            
+.time {
+        font-size: 20px;
+        color: black;
+}
+/*.contents {
+                background-color: skyblue;
+}
+*/
+            
+.tweetinformation {
+                    background-color: brown;
+                    font-size: 15px;
+                    text-align: center;
+                    outline-style: solid;
+                    outline-width: medium;
+                    border-width: 25px 10px 4px 35px; /* top, right, bottom, left */
+                
+}
+            
+p{
+    color: white;
+}
                 
     
