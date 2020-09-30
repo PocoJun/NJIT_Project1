@@ -53,6 +53,7 @@
 
 1. I think my coding looks dirty, so I need to organize the functions.
 2. In twitter user, I need to change search_user to search to find language= 'en'.
+3. The size of picture from spoonacular does not fit the box. If I have more time, I can fix it.
 
 
 
