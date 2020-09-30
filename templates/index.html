@@ -3,49 +3,48 @@
         
         <title>Food Recipe</title>
          <link rel="stylesheet" href= "../static/food_style.css" type= "text/css"  />
-         <meta http-equiv="refresh" content="5" >
-         <style>
+         <!meta http-equiv="refresh" content="5" >
         
-            
-            h1{
-                text-align: center;
-                font-size: 40px;
-            }
-            h2{
-                font-size: 80px;
-                text-align: center;
-                color: blue;
-            }
-            h3{
-                color: yellow;
-                font-size:50px;
-            }
-            .contents {
-                background-color: brown;
-            }
-            
-            .information {
-                background-color: blue;
-                font-size: 30px;
-                text-align: center;
-                
-            }
-            
-            p{
-                color: red;
-            }
-            
-        </style>
     </head>
     <body>
     <div class="contents">
-        <h1> Project1 </h1>
-        <h2> Food Name: {{ Food_name }}</h2>
-        <h3>Twitter of {{ name }}, @{{ screen_name }}<br>
-            Description: {{  description  }}
-        </h3>
+        <h1>
+        <p class="name">  {{ recipe_name }}  <br>
+        </p>
+        </h1>
+        <h2>
+            <a href= "recipe_url"> {{ recipe_url}} </a> 
+        </h2>
+        <table border="1">
+        <tr>
+            <td class="left">
+                <img src={{ recipe_image }} width="auto" height="auto"> 
+            </td>                 
+            <td>
+                 <p class="info">
+                            Cooking time = {{ recipe_time }}, Servings = {{ recipe_source }} <br>
+                </p>
+                
+                    <p class= "ingredients">
+                    ingredients = <br>
+                    </p>
+                <ol class= "list">    
+                    {% for i in ingredients %}
+                    
+                        * {{ i }} <br>
+                    
+                    {% endfor %}
+                    
+                </ol>
+            </td>
+        </tr>
+        </table>
     </div>
-    <div class="information">
+    <div class="tweetinformation">
+            
+            <p class="tweetsName"> Food Name: {{ Food_name }} </p>
+            <p class="tweetsUser"> Twitter of {{ name }}, @{{ screen_name }}</p>
+            <p class="tweetsDes"> {{  description  }} </p>
             <p> Date: {{ date }}<br>
                 Link: {{ link }}
             </p>
