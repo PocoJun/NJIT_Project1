@@ -24,11 +24,11 @@ auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = API(auth)
 
-food_list = ["Pork Cutlet", "Bulgogi", "Ramen", "Macaron", "Kimchi", "Sushi", "Chicken Soup", "Udon"]
-
 app = flask.Flask(__name__)
 
 def food_get():
+    
+    food_list = ["Pork Cutlet", "Bulgogi", "Ramen", "Macaron", "Kimchi", "Sushi", "Chicken Soup", "Udon"]
     # random food choice
     choose = random.choice(food_list)
     return choose
